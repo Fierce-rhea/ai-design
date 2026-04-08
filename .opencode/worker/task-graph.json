@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "status": "running",
+  "createdAt": "2026-04-08T06:53:04.879Z",
+  "updatedAt": "2026-04-08T06:53:04.879Z",
+  "changeHistory": [
+    {
+      "version": "1.0",
+      "timestamp": "2026-04-08T06:53:04.879Z",
+      "reason": "初始创建"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-PRD",
+      "subject": "需求分析与 PRD 输出",
+      "owner": "product-manager",
+      "status": "ready",
+      "blockedBy": [],
+      "blocks": [
+        "T-CODE"
+      ],
+      "category": "analysis",
+      "input": [],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "retryCount": 0,
+      "maxRetries": 2
+    },
+    {
+      "id": "T-UI",
+      "subject": "UI 设计规范输出",
+      "owner": "ui-designer",
+      "status": "ready",
+      "blockedBy": [],
+      "blocks": [
+        "T-CODE"
+      ],
+      "category": "design",
+      "input": [],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "retryCount": 0,
+      "maxRetries": 2
+    },
+    {
+      "id": "T-CODE",
+      "subject": "前端代码实现",
+      "owner": "frontend-expert",
+      "status": "pending",
+      "blockedBy": [
+        "T-PRD",
+        "T-UI"
+      ],
+      "blocks": [
+        "T-QA"
+      ],
+      "category": "development",
+      "input": [],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "retryCount": 0,
+      "maxRetries": 2
+    },
+    {
+      "id": "T-QA",
+      "subject": "构建验证与测试",
+      "owner": "qa-engineer",
+      "status": "pending",
+      "blockedBy": [
+        "T-CODE"
+      ],
+      "blocks": [],
+      "category": "qa",
+      "input": [],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "retryCount": 0,
+      "maxRetries": 2
+    }
+  ]
+}

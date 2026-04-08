@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-04-08T06:53:58.472Z",
+  "version": "1.0",
+  "status": "running",
+  "shouldResumeManager": true,
+  "resumeReason": "检测到新的 ready 任务，项目经理可恢复编排",
+  "readyTasks": [
+    {
+      "id": "T-PRD",
+      "subject": "需求分析与 PRD 输出",
+      "owner": "product-manager"
+    },
+    {
+      "id": "T-UI",
+      "subject": "UI 设计规范输出",
+      "owner": "ui-designer"
+    }
+  ],
+  "runningTasks": [],
+  "completedTasks": [],
+  "cancelledTasks": [],
+  "concurrencyLimit": 5,
+  "shouldThrottle": false,
+  "heartbeatStatus": "healthy"
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "sisyphus_agent": {
+    "disabled": true,
+    "default_builder_enabled": false,
+    "planner_enabled": false,
+    "replace_plan": true
+  },
+  "disabled_agents": [
+    "sisyphus",
+    "hephaestus",
+    "prometheus",
+    "oracle",
+    "librarian",
+    "multimodal-looker",
+    "metis",
+    "momus",
+    "atlas",
+    "sisyphus-junior"
+  ],
+  "disabled_hooks": [
+    "ralph-loop",
+    "no-sisyphus-gpt",
+    "start-work",
+    "auto-slash-command"
+  ],
+  "agents": {
+    "project-manager": {
+      "model": "opencode/big-pickle"
+    },
+    "product-manager": {
+      "model": "opencode/big-pickle"
+    },
+    "ui-designer": {
+      "model": "opencode/big-pickle"
+    },
+    "frontend-expert": {
+      "model": "opencode/big-pickle"
+    },
+    "qa-engineer": {
+      "model": "opencode/big-pickle"
+    },
+    "explore": {
+      "model": "opencode/big-pickle"
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode/big-pickle"
+    },
+    "ultrabrain": {
+      "model": "opencode/big-pickle"
+    },
+    "deep": {
+      "model": "opencode/big-pickle"
+    },
+    "artistry": {
+      "model": "opencode/big-pickle"
+    },
+    "quick": {
+      "model": "opencode/big-pickle"
+    },
+    "unspecified-low": {
+      "model": "opencode/big-pickle"
+    },
+    "unspecified-high": {
+      "model": "opencode/big-pickle"
+    },
+    "writing": {
+      "model": "opencode/big-pickle"
+    }
+  },
+  "background_task": {
+    "defaultConcurrency": 5,
+    "staleTimeoutMs": 300000
+  }
+}

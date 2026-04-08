@@ -5,9 +5,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clawteam:setup": "openclaw setup",
+    "clawteam:gateway": "openclaw gateway",
+    "clawteam:tui": "openclaw tui",
+    "clawteam:status": "openclaw status",
+    "opencode:bootstrap": "node .opencode/scripts/bootstrap-runtime.mjs",
+    "opencode:pm": "node .opencode/scripts/bootstrap-runtime.mjs --quiet && opencode --agent project-manager --dir .",
+    "opencode:watch": "node .opencode/scripts/bootstrap-runtime.mjs --quiet && node .opencode/scripts/auto-resume-manager.mjs",
+    "opencode:status": "node .opencode/scripts/opencode-status.mjs"
   },
   "dependencies": {
+    "element-ui": "^2.15.14",
     "vue": "^2.7.16",
     "vue-router": "^3.6.5",
     "vuex": "^3.6.2"

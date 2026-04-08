@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-04-08T06:54:23.430Z",
+  "request": "帮我生成杭州银行官网",
+  "manager": {
+    "role": "project-manager",
+    "status": "failed",
+    "sessionStrategy": "continue-last-session",
+    "resumeCount": 0,
+    "lastResumeAt": "",
+    "lastResumeReason": "",
+    "lastExitAt": "2026-04-08T06:54:23.430Z",
+    "lastExitReason": "子任务模型不可用导致派发失败"
+  },
+  "graph": {
+    "version": "1.0",
+    "status": "running",
+    "counts": {
+      "total": 4,
+      "ready": 2,
+      "running": 0,
+      "completed": 0,
+      "failed": 0,
+      "cancelled": 0,
+      "superseded": 0
+    }
+  },
+  "dispatches": [
+    {
+      "taskId": "T-PRD",
+      "owner": "product-manager",
+      "subject": "需求分析与 PRD 输出",
+      "status": "ready",
+      "category": "analysis",
+      "blockedBy": [],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "lastDispatchAt": null,
+      "dispatchCount": 0,
+      "notes": ""
+    },
+    {
+      "taskId": "T-UI",
+      "owner": "ui-designer",
+      "subject": "UI 设计规范输出",
+      "status": "ready",
+      "category": "design",
+      "blockedBy": [],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "lastDispatchAt": null,
+      "dispatchCount": 0,
+      "notes": ""
+    },
+    {
+      "taskId": "T-CODE",
+      "owner": "frontend-expert",
+      "subject": "前端代码实现",
+      "status": "pending",
+      "category": "development",
+      "blockedBy": [
+        "T-PRD",
+        "T-UI"
+      ],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "lastDispatchAt": null,
+      "dispatchCount": 0,
+      "notes": ""
+    },
+    {
+      "taskId": "T-QA",
+      "owner": "qa-engineer",
+      "subject": "构建验证与测试",
+      "status": "pending",
+      "category": "qa",
+      "blockedBy": [
+        "T-CODE"
+      ],
+      "output": null,
+      "message": null,
+      "createdAt": "2026-04-08T06:53:04.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "lastDispatchAt": null,
+      "dispatchCount": 0,
+      "notes": ""
+    }
+  ],
+  "lastSignal": {
+    "shouldResumeManager": true,
+    "resumeReason": "检测到新的 ready 任务，项目经理可恢复编排",
+    "timestamp": "2026-04-08T06:53:58.472Z"
+  },
+  "heartbeatStatus": "healthy",
+  "concurrencyLimit": 5,
+  "shouldThrottle": false
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://docs.openclaw.ai/reference/config",
+  "agents": [
+    {
+      "id": "orchestrator",
+      "name": "编排者",
+      "soul": "agents/orchestrator/SOUL.md",
+      "memory": "memory/orchestrator.md",
+      "sharedContext": ["shared/project-context.md"],
+      "model": {
+        "primary": "volcengine/deepseek-v3-2-251201"
+      },
+      "channels": ["terminal"],
+      "subAgents": ["product-manager", "ui-designer", "frontend-expert", "qa-engineer"]
+    },
+    {
+      "id": "product-manager",
+      "name": "产品经理",
+      "soul": "agents/product-manager/SOUL.md",
+      "memory": "memory/product-manager.md",
+      "sharedContext": ["shared/project-context.md"],
+      "model": {
+        "primary": "volcengine/deepseek-v3-2-251201"
+      },
+      "channels": []
+    },
+    {
+      "id": "ui-designer",
+      "name": "UI设计师",
+      "soul": "agents/ui-designer/SOUL.md",
+      "memory": "memory/ui-designer.md",
+      "sharedContext": ["shared/project-context.md"],
+      "model": {
+        "primary": "volcengine/deepseek-v3-2-251201"
+      },
+      "channels": []
+    },
+    {
+      "id": "frontend-expert",
+      "name": "前端专家",
+      "soul": "agents/frontend-expert/SOUL.md",
+      "memory": "memory/frontend-expert.md",
+      "sharedContext": ["shared/project-context.md"],
+      "model": {
+        "primary": "volcengine/deepseek-v3-2-251201"
+      },
+      "channels": [],
+      "tools": ["read_file", "write_file", "run_command"]
+    },
+    {
+      "id": "qa-engineer",
+      "name": "测试专家",
+      "soul": "agents/qa-engineer/SOUL.md",
+      "memory": "memory/qa-engineer.md",
+      "sharedContext": ["shared/project-context.md"],
+      "model": {
+        "primary": "volcengine/deepseek-v3-2-251201"
+      },
+      "channels": []
+    }
+  ],
+  "workspace": {
+    "baseDir": ".",
+    "workDir": ".clawteam/work",
+    "backupsDir": ".clawteam/work/backups",
+    "logsDir": ".clawteam/logs"
+  },
+  "memory": {
+    "autoUpdate": true,
+    "maxAge": "7d"
+  },
+  "defaults": {
+    "model": {
+      "primary": "volcengine/deepseek-v3-2-251201"
+    }
+  }
+}

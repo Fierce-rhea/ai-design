@@ -1,0 +1,68 @@
+[meta]
+name = "login-app"
+description = "登录页面开发团队 - 并行执行 PRD + UI → CODE → QA"
+
+[roles.prd]
+agent = "claude"
+task = '''
+请完成登录页面的 PRD 文档。
+
+用户需求：{{goal}}
+
+输出要求：
+1. 写入 .opencode/work/prd.md
+2. 包含：项目概述、页面清单、功能描述、验收标准
+3. 完成后执行: oh inbox send {{team_name}} leader "PRD 已完成"
+4. 执行: oh task update {{team_name}} {{task_id}} --status completed
+'''
+
+[roles.ui]
+agent = "claude"
+task = '''
+请完成登录页面的 UI 设计。
+
+用户需求：{{goal}}
+
+输出要求：
+1. 读取 .opencode/work/prd.md（如存在）
+2. 写入 .opencode/work/design.md
+3. 包含：配色方案、布局规范、组件说明
+4. 完成后执行: oh inbox send {{team_name}} leader "UI 设计已完成"
+5. 执行: oh task update {{team_name}} {{task_id}} --status completed
+'''
+
+[roles.code]
+agent = "claude"
+task = '''
+请完成登录页面的 Vue 2 代码开发。
+
+用户需求：{{goal}}
+
+输入文件：
+1. .opencode/work/prd.md
+2. .opencode/work/design.md
+
+输出要求：
+1. 在 src/views/ 下创建 Login.vue
+2. 修改 src/router/index.js 添加路由
+3. 运行 npm run build 验证
+4. 完成后执行: oh inbox send {{team_name}} leader "代码开发已完成"
+5. 执行: oh task update {{team_name}} {{task_id}} --status completed
+'''
+
+[roles.qa]
+agent = "claude"
+task = '''
+请完成登录页面的测试验证。
+
+输出要求：
+1. 运行 npm run build 验证构建
+2. 检查代码规范（scoped 样式、name 声明等）
+3. 写入 .opencode/work/qa-report.md
+4. 完成后执行: oh inbox send {{team_name}} leader "测试验证已完成"
+5. 执行: oh task update {{team_name}} {{task_id}} --status completed
+'''
+
+[dependencies]
+code = ["prd", "ui"]
+qa = ["code"]

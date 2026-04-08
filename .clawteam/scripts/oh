@@ -1,0 +1,4 @@
+#!/bin/bash
+# oh 命令封装 - 自动添加 PATH
+export PATH="$HOME/.local/bin:$PATH"
+clawteam "$@"

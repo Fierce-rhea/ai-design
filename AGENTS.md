@@ -1,5 +1,3 @@
-# AGENTS.md
-
 > **🚨 强制指令：所有输出必须使用中文**
 > 
 > - 所有回复、解释、说明必须使用中文
@@ -8,116 +6,214 @@
 > - 与用户的所有交互默认中文，除非用户明确要求其他语言
 > - **此规则优先级最高，不可忽略**
 
-## 项目概述
+---
 
-Vue 2.7 + Vite 5 SPA，使用 Vue Router 3 和 Vuex 3。
+# AI Agent Team - ClawTeam + OpenCode
 
-## 命令
+本项目使用 **ClawTeam + OpenCode** 作为 AI Agent 协作框架。
+
+## 🦞 ClawTeam 架构
+
+```
+┌─────────────────────────────────────────────────────┐
+│                    ClawTeam                          │
+├─────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │
+│  │  SOUL.md    │  │  SOUL.md    │  │  SOUL.md    │ │
+│  │ (人格定义)  │  │ (人格定义)  │  │ (人格定义)  │ │
+│  ├─────────────┤  ├─────────────┤  ├─────────────┤ │
+│  │ memory.md   │  │ memory.md   │  │ memory.md   │ │
+│  │ (独立记忆)  │  │ (独立记忆)  │  │ (独立记忆)  │ │
+│  └─────────────┘  └─────────────┘  └─────────────┘ │
+│                                                     │
+│  ┌─────────────────────────────────────────────┐   │
+│  │         shared/project-context.md           │   │
+│  │              (共享上下文)                   │   │
+│  └─────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────┘
+```
+
+## 🚀 启动方式
+
+### 方式一：使用 npm scripts（推荐）
 
 ```bash
-npm run dev       # 启动开发服务器 (Vite, HMR)
-npm run build     # 生产构建
-npm run preview   # 本地预览生产构建
+# 首次使用：配置 OpenClaw
+npm run clawteam:setup
+
+# 启动编排者（主编排器，与用户交互）
+npm run clawteam:start
+
+# 启动所有 agent
+npm run clawteam:start:all
+
+# 查看 agent 状态
+npm run clawteam:status
 ```
 
-**当前未配置测试和 lint 脚本。** 如需添加：
-- 测试: `npm i -D vitest @vue/test-utils jsdom` 然后添加 `"test": "vitest"`
-- Lint: `npm i -D eslint eslint-plugin-vue` 然后添加 `"lint": "eslint src/ --ext .js,.vue"`
+### 方式二：直接使用 openclaw CLI
 
-## 架构
-
-```
-src/
-├── main.js              # Vue 应用入口
-├── App.vue              # 根组件 (<router-view />)
-├── router/index.js      # Vue Router 3 (history 模式)
-├── store/index.js       # Vuex 3 store
-├── views/               # 页面级组件
-│   └── Home.vue
-└── components/          # 可复用组件 (当前为空)
+```bash
+openclaw start --agent orchestrator
 ```
 
-## 代码风格
+---
 
-### Vue 组件 (SFC)
-- 使用 Options API (Vue 2 规范)
-- 顺序: `<template>` → `<script>` → `<style>`
-- 必须声明 `name` 属性
-- 使用 `scoped` 样式，除非是全局样式
-- 组件名: PascalCase (`Home`, `UserList`)
-- 文件名: PascalCase (`Home.vue`, `UserList.vue`)
+## 👥 Agent 团队
 
-### JavaScript
-- ES modules (`import`/`export`)
-- 不使用分号
-- 字符串使用单引号
-- 2 空格缩进
-- `const` 优先于 `let`，避免 `var`
-- 简单回调使用箭头函数: `h => h(App)`
+| Agent | 角色 | SOUL.md | 职责 |
+|-------|------|---------|------|
+| **orchestrator** | 编排者 | `.clawteam/agents/orchestrator/SOUL.md` | 项目经理，调度中枢 |
+| **product-manager** | 产品经理 | `.clawteam/agents/product-manager/SOUL.md` | 需求分析、PRD 输出 |
+| **ui-designer** | UI设计师 | `.clawteam/agents/ui-designer/SOUL.md` | 视觉设计、布局规范 |
+| **frontend-expert** | 前端专家 | `.clawteam/agents/frontend-expert/SOUL.md` | Vue 2 组件开发 |
+| **qa-engineer** | 测试专家 | `.clawteam/agents/qa-engineer/SOUL.md` | 构建验证、质量检查 |
 
-### Vue Router
-- 路由名: PascalCase (`Home`, `About`)
-- 使用 history 模式 (`mode: 'history'`)
-- 路由懒加载: `() => import('../views/Page.vue')`
-
-### Vuex
-- State: 顶层普通对象
-- Mutations: 仅同步操作，命名使用 SCREAMING_SNAKE_CASE 或 camelCase
-- Actions: 异步操作，commit mutations
-- 组件中使用 `mapState`/`mapActions`/`mapGetters` 而非直接访问 `$store`
-
-### 错误处理
-- Vue 错误处理器: `Vue.config.errorHandler`
-- 路由导航守卫错误: 在 `router.onError()` 中捕获
-- API 调用: 使用 try/catch，将错误状态提交到 Vuex
-
-### CSS
-- 组件级 scoped 样式
-- 使用 Flexbox 布局
-- 全局重置仅在 `App.vue` 中
-
-## 添加新功能
-
-### 新页面
-1. 创建 `src/views/PageName.vue`
-2. 在 `src/router/index.js` 中添加路由
-
-### 新组件
-1. 创建 `src/components/ComponentName.vue`
-2. 在父组件中局部注册 `components: {}`
-
-### 新 Vuex 模块
-1. 在 `src/store/index.js` 中添加模块，或拆分到 `src/store/modules/`
-2. 在 `modules: {}` 中注册
-
-## 多 Agent 协作
-
-### Agent 架构
-
-| Agent | 模式 | 职责 |
-|-------|------|------|
-| `project-manager` | primary | 流程编排，用户第一接触点 |
-| `product-manager` | subagent | 需求分析，PRD 输出 |
-| `ui-designer` | subagent | 视觉设计，组件树，布局 |
-| `frontend-expert` | subagent | Vue 2 组件开发 |
-| `qa-engineer` | subagent | 构建验证，代码审查 |
-
-### 工作流
+## 📁 目录结构
 
 ```
-用户请求 → project-manager (计划) → 用户确认
-  → product-manager (PRD) → 用户确认
-  → ui-designer (设计规范) → 用户确认
-  → frontend-expert (代码) → qa-engineer (验证) → 完成
+.clawteam/
+├── openclaw.json           # 主配置文件
+├── agents/                 # Agent 定义
+│   ├── orchestrator/
+│   │   └── SOUL.md
+│   ├── product-manager/
+│   │   └── SOUL.md
+│   ├── ui-designer/
+│   │   └── SOUL.md
+│   ├── frontend-expert/
+│   │   └── SOUL.md
+│   └── qa-engineer/
+│       └── SOUL.md
+├── memory/                 # Agent 记忆
+│   ├── orchestrator.md
+│   ├── product-manager.md
+│   ├── ui-designer.md
+│   ├── frontend-expert.md
+│   └── qa-engineer.md
+├── shared/                  # 共享上下文
+│   └── project-context.md
+├── work/                    # 工作产出
+│   ├── prd.md              # 产品需求文档
+│   ├── design.md           # 设计规范
+│   ├── qa-report.md        # 测试报告
+│   └── backups/            # 代码备份
+└── logs/                    # 日志
 ```
 
-- 每步完成后等待用户确认
-- 产出物写入 `.opencode/work/` 目录
-- 进度追踪在 `.opencode/worker/process.md`
-- 流程定义在 `.opencode/worker/workflow.md` (不可变)
+## 🔄 工作流程
 
-### 代码生成规则
+```
+用户需求
+    │
+    ▼
+┌─────────────────────────────────────┐
+│  🎯 编排者 (orchestrator)            │
+│  - 分析需求                          │
+│  - 创建任务计划                      │
+│  - 调度团队成员                      │
+└─────────────────────────────────────┘
+    │
+    ├─────────────────────────────────┐
+    │                                 │
+    ▼                                 ▼
+┌───────────────────┐     ┌───────────────────┐
+│ 💼 产品经理        │     │ 🎨 UI 设计师      │
+│ product-manager   │     │ ui-designer      │
+│ 输出: prd.md      │     │ 输出: design.md  │
+└───────────────────┘     └───────────────────┘
+    │                                 │
+    │         并行完成后              │
+    ▼                                 ▼
+┌─────────────────────────────────────┐
+│  💻 前端专家 (frontend-expert)       │
+│  输出: src/ 下的 Vue 组件            │
+└─────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────┐
+│  🧪 测试专家 (qa-engineer)            │
+│  输出: qa-report.md                 │
+└─────────────────────────────────────┘
+```
 
-- 所有生成代码必须遵循本文件规范
-- 组件遵循 Vue 2 SFC 规范 (Options API, scoped 样式)
-- 修改文件前先备份到 `.opencode/work/backups/`
+## 🎯 委派格式
+
+编排者使用以下格式委派任务：
+
+```
+→ DELEGATE product-manager: 为用户登录功能创建 PRD
+→ DELEGATE ui-designer: 基于登录需求设计界面
+→ DELEGATE frontend-expert: 实现登录页面 Vue 组件
+→ DELEGATE qa-engineer: 验证登录功能构建
+```
+
+## 📋 产出物
+
+| Agent | 输出文件 |
+|-------|----------|
+| 产品经理 | `.clawteam/work/prd.md` |
+| UI设计师 | `.clawteam/work/design.md` |
+| 前端专家 | `src/views/` 或 `src/components/` 下的文件 |
+| 测试专家 | `.clawteam/work/qa-report.md` |
+
+---
+
+## ⚙️ 配置说明
+
+### OpenClaw + OpenCode 集成
+
+在 `.clawteam/openclaw.json` 中配置：
+
+```json
+{
+  "env": {
+    "OPENCODE_API_KEY": "${OPENCODE_API_KEY}"
+  },
+  "agents": {
+    "orchestrator": {
+      "model": {
+        "primary": "opencode/claude-opus-4-6"
+      }
+    }
+  }
+}
+```
+
+### 环境变量
+
+```bash
+# 设置 OpenCode API Key
+export OPENCODE_API_KEY="your-api-key"
+```
+
+---
+
+## 🔧 常用命令
+
+| 命令 | 说明 |
+|------|------|
+| `npm run clawteam:setup` | 首次配置 OpenClaw |
+| `npm run clawteam:start` | 启动编排者 |
+| `npm run clawteam:start:all` | 启动所有 agent |
+| `npm run clawteam:status` | 查看状态 |
+| `npm run dev` | 启动开发服务器 |
+| `npm run build` | 生产构建 |
+
+---
+
+## 📚 相关资源
+
+- [OpenClaw 文档](https://docs.openclaw.ai)
+- [OpenCode 文档](https://opencode.ai/docs/)
+- [ClawTeam GitHub](https://github.com/win4r/ClawTeam-OpenClaw)
+
+---
+
+## ⚠️ 注意
+
+1. **ClawTeam 是主编排层**：编排者（orchestrator）负责接收用户需求并调度团队
+2. **OpenCode 是后端执行层**：ClawTeam 使用 OpenCode 作为 LLM backend
+3. **并行执行**：产品经理和 UI 设计师可以并行工作
+4. **顺序依赖**：前端专家依赖前两者的产出，测试专家依赖前端完成
+
